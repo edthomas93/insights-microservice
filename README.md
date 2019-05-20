@@ -45,54 +45,43 @@ Then, run the feature tests:
 
 Docs: https://www.themoviedb.org/documentation/api
 
-Example URL: https://api.themoviedb.org/3/discover/movie?api_key={apiKey}
+Example URL: https://api.themoviedb.org/3/movie/popular?api_key={apiKey}
 
 So what do we want you to do? Here are some User Stories to get you started:
 
 ```
 As a Film Enthusiast
 So I can find a good movie to watch
-I want to Search through a list of movies
+I want to be able to GET a list of the most popular movies in the format:
+
+{
+  id: 1,
+  name: 'Film Name',
+  averageVote: 7.4,
+  description: 'This is a film about stuff!'
+}
 ```
 
 ```
 As a Film Enthusiast
-So I can get a sense for what to watch
-I want to See the movie title, poster and an overview
+So I can read through a manageable list
+I want to be able to limit the number of films that are returned
 ```
 
 ```
 As a Film Enthusiast
-So I can remember what I've been browsing
-I want to pick my favourite films from a list
+So that I can see the highest rated films
+I want to be able to sort my list by averageVote
 ```
 
 ```
 As a Film Enthusiast
-So I know which films a re good and which are bad
-I want to rank movies in order
-```
-
-```
-As a Film Enthusiast who can only count up to 5
-So that I can remember my favourite films ever
-I want to persist only my top 5 to a database
+So that I can keep up-to-date with upcoming films
+I want to be able to see a list of upcoming films
 ```
 
 ```
 As a Film Enthusiast
-So I can change my mind
-I want to be able to re-order my ranking list
-```
-
-```
-As a Film Enthusiast who can only count up to 5
-So I can understand what is a good film or not,
-I want to change a pre-determined ranking to be out of 5
-```
-
-```
-As a Film Enthusiast
-So I can add new films to my Top 5
-Dynamically update my rankings
+So that I can search upcoming films
+I want to be filter upcoming films by a minimum and maximum date
 ```
