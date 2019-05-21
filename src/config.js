@@ -2,6 +2,9 @@ module.exports = {
   express: {
     port: parseInt(process.env.EXPRESS_PORT, 10) || 3000
   },
+  films: {
+    url: process.env.FILMS_URL || 'http://localhost:4000/films'
+  },
   transactions: {
     url: process.env.TRANSACTIONS_URL || 'http://localhost:4000/transactions'
   },
