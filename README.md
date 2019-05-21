@@ -34,7 +34,7 @@ To run, we will need 2 terminal sessions open.
 
 First, run the service with the correct environment variables:
 
-`TRANSACTIONS_URL=https://transactions.spokedev.xyz/transactions npm start`
+`TRANSACTIONS_URL=https://transactions.spokedev.xyz/transactions FILMS_URL=https://api.themoviedb.org/3/discover/movie?api_key=644acca3387ecec843208faf256793df npm start`
 
 Then, run the feature tests:
 

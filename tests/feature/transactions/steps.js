@@ -8,7 +8,7 @@ setDefaultTimeout(20 * 1000);
 
 chai.should();
 
-When('I call the GET transactions route', async () => {
+When('I call the GET transactions route', async function() {
   this.response = await rp({
     url: `${config.thisService.url}/transactions`,
     method: 'GET',
@@ -17,19 +17,15 @@ When('I call the GET transactions route', async () => {
   this.responseBody = JSON.parse(this.response.body);
 });
 
-Then('The the GET transactions route should return a status code of {int}', (statusCode) => {
+Then('The the GET transactions route should return a status code of {int}', function (statusCode) {
   this.response.statusCode.should.equal(statusCode);
 });
 
-Then('The response body should be an Array', () => {
-  this.responseBody.should.be.an('array');
-});
-
-Then('The response body should have {int} transactions', (length) => {
+Then('The response body should have {int} transactions', function (length) {
   this.responseBody.length.should.equal(length);
 });
 
-Then('The response body should be a list of transactions', () => {
+Then('The response body should be a list of transactions', function () {
   this.responseBody.forEach((trx) => {
     trx.should.have.property('id');
     trx.should.have.property('amount');

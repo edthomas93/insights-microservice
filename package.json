@@ -8,7 +8,7 @@
   "scripts": {
     "test:unit": "LOG_LEVEL=INFO ./node_modules/.bin/nyc --reporter=lcov --report-dir=./coverage/unit ./node_modules/.bin/mocha --reporter spec --exit ./tests/unit/*",
     "test:component": "RESPONSE_VALIDATION=true LOG_LEVEL=INFO ./tests/component.sh",
-    "test:feature": "LOG_LEVEL=FATAL ./node_modules/.bin/cucumber-js ./tests/feature/*/*.feature",
+    "test:feature": "LOG_LEVEL=FATAL ./node_modules/.bin/cucumber-js ./tests/feature/**/*.feature --require ./tests/feature/common.steps.js --require './tests/feature/**/steps.js'",
     "test:stryker": "./node_modules/.bin/stryker run",
     "lint": "./node_modules/.bin/eslint . --max-warnings=0",
     "audit": "./node_modules/.bin/npm-check",
