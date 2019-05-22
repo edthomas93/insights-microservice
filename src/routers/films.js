@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log('ROUTER');
     const films = await controllers.films.list();
     res.status(200).json(films);
     return next();

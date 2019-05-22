@@ -3,6 +3,7 @@ const { ServiceError } = require('../errors');
 const filmlistHandler = require('../handlers/filmsHandler');
 
 const list = async () => {
+  console.log('CONTROLLER')
   try {
     const filmList = await films.list();
     return filmlistHandler.format(filmList);
