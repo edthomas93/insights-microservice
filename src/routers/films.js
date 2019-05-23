@@ -3,6 +3,7 @@ const controllers = require('../controllers');
 
 const router = express.Router();
 
+// GET POPULAR?
 router.get('/', async (req, res, next) => {
   try {
     console.log('ROUTER');
@@ -15,5 +16,12 @@ router.get('/', async (req, res, next) => {
     return next();
   }
 });
+
+// GET OTHER? FE TEAM MAY HAVE OTHER GET ROUTES THEY USE ATM
+
+// POST FAVOURITE
+
+// GET FAVOURITES
+
 
 module.exports = router;

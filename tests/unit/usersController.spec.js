@@ -1,82 +1,39 @@
 const { expect } = require('chai');
 const nock = require('nock');
-const config = require('../../src/config');
+require('../../src/index');
 const controllers = require('../../src/controllers');
-const users = require('../responses/users');
 const user = require('../responses/user');
+const User = require('../../src/models/user');
 
 describe('Users Controller', () => {
+  beforeEach(async () => await User.deleteMany({}));
   afterEach(() => nock.cleanAll());
 
   describe('#post', () => {
       context('SUCCESS:', () => {
           it('creates a new user', async () => {
-            //mocks call to the Users Service
-            const id = 1;
-            const usersMock = nock(config.users.url)
-              .post('', 'username=ed&password=123456')
-              .reply(200, { id: id})
-            
-            const result = await controllers.users.user(id);
-
-            expect(result).to.eql(user)
-            //asserts the mock was called
-            usersMock.done();
+            const body = {
+              username: 'eddyt993',
+              password: 'password'
+            };
+            const result = await controllers.users.create(body);
+            expect(result.username).to.eql(user.username);
+            expect(result.password).to.eql(user.password);
+            expect(result.favourites).to.eql(user.favourites);
+            result.should.have.property('id');
           });
       });
-      context('ERROR:', () => {
-        it('returns a 500 error when an error is thrown by the Users Service', async () => {
-          // mocks the call to the Users Service
-          const usersMock = nock(config.users.url)
-            .post('', 'username=ed&password=123456')
-            .reply(500);
-  
+      context('ERROR', () => {
+        it('fails to create user', async () => {
+          const body = {
+            password: 'password'
+          };
           try {
-            await controllers.users.list();
-            // ensure the catch block is called so that our assertions are run
-            throw new Error();
+            await controllers.users.create(body);
           } catch (error) {
-            expect(error.statusCode).to.equal(500);
-            // asserts the mock was called
-            usersMock.done();
-          }
+            expect(error).to.not.equal(null);
+          };
         });
       });
-  });
-
-  describe('#list', () => {
-    context('SUCCESS:', () => {
-      it('returns a list of users', async () => {
-        // mocks the call to the Users Service
-        const usersMock = nock(config.users.url)
-          .get('')
-          .reply(200, films);
-
-        const result = await controllers.users.list();
-
-        expect(result).to.eql(users);
-        // asserts the mock was called
-        usersMock.done();
-      });
-    });
-
-    context('ERROR:', () => {
-      it('returns a 500 error when an error is thrown by the Users Service', async () => {
-        // mocks the call to the Users Service
-        const usersMock = nock(config.users.url)
-          .get('')
-          .reply(500);
-
-        try {
-          await controllers.users.list();
-          // ensure the catch block is called so that our assertions are run
-          throw new Error();
-        } catch (error) {
-          expect(error.statusCode).to.equal(500);
-          // asserts the mock was called
-          usersMock.done();
-        }
-      });
-    });
   });
 });

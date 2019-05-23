@@ -1,20 +1,29 @@
 // cucumber / Gherkin and chai for test steps and assertions
-const { When, Then, setDefaultTimeout } = require('cucumber');
+const { When, Then, Given } = require('cucumber');
 const chai = require('chai');
 const rp = require('request-promise');
 const config = require('../../config');
-
-setDefaultTimeout(20 * 1000);
+require('../../../src/index');
+const User = require('../../../src/models/user');
 
 chai.should();
 
+Given('the database is empty', async () => {
+  await User.deleteMany({});
+})
+
 When('I call the POST users route', async function () {
   this.response = await rp({
-    url: `${config.thisService.url}/users`,
+    url: `${config.thisService.url}/users/signup`,
     method: 'POST',
-    resolveWithFullResponse: true
+    headers: {'Content-Type': 'application/json'},
+    body: {
+      username: 'Tom',
+      password: 'password'
+    },
+    resolveWithFullResponse: true,
+    json: true
   });
-  this.responseBody = JSON.parse(this.response.body);
 });
 
 Then('The POST users route should return a status code of {int}', function (statusCode) {
@@ -22,14 +31,15 @@ Then('The POST users route should return a status code of {int}', function (stat
 });
 
 Then('The response body should be an Object', function () {
-  this.responseBody.should.be.an('object');
+
+  this.response.body.should.be.an('object');
 });
 
 Then('The response body should be new user details', function () {
-  this.responseBody.should.have.property('id');
-  this.responseBody.should.have.property('username');
-  this.responseBody.should.have.property('password');
-  this.responseBody.should.have.property('favourites');
+  this.response.body.should.have.property('id');
+  this.response.body.should.have.property('username');
+  this.response.body.should.have.property('password');
+  this.response.body.should.have.property('favourites');
 });
 
 When('I call the GET users route', async function () {

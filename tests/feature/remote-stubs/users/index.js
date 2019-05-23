@@ -1,13 +1,13 @@
 const { heads: { RoboHydraHead } } = require('robohydra');
-const transactions = require('../../../responses/transactions');
+const users = require('../../../responses/users');
 
 exports.getBodyParts = () => ({
   heads: [
     new RoboHydraHead({
-      path: '/transactions',
+      path: '/users',
       method: 'GET',
       handler(req, res) {
-        const response = JSON.stringify(transactions);
+        const response = JSON.stringify(users);
         res.send(response);
       }
     })

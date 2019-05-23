@@ -9,4 +9,4 @@ Feature: Get films
 
     Examples:
     | status | length |
-    | 200    | 20     |
+    | 200    | 1      |
