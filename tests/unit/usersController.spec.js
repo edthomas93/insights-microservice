@@ -6,7 +6,15 @@ const user = require('../responses/user');
 const User = require('../../src/models/user');
 
 describe('Users Controller', () => {
-  beforeEach(async () => await User.deleteMany({}));
+  beforeEach(async () => {
+    try {
+      console.log('DELETING USERS ==>>');
+      await User.deleteMany({})
+      console.log('SUCCESSFULLY DELETED USERS ==>>');
+    } catch (error) {
+      console.log('ERROR ==>>', error);
+    }
+  });
   afterEach(() => nock.cleanAll());
 
   describe('#post', () => {
@@ -18,8 +26,7 @@ describe('Users Controller', () => {
             };
             const result = await controllers.users.create(body);
             expect(result.username).to.eql(user.username);
-            expect(result.password).to.eql(user.password);
-            expect(result.favourites).to.eql(user.favourites);
+            result.should.have.property('sessionkey');
             result.should.have.property('id');
           });
       });

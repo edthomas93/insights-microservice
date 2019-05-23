@@ -2,10 +2,10 @@ Feature: Post users
 
   Scenario Outline: I can create a user
     Given the database is empty
-    When I call the POST users route
-    Then The POST users route should return a status code of <status>
+    When I call the POST /signup route
+    Then The route should return a status code of <status>
     And The response body should be an Object
-    And The response body should be new user details
+    And The response body should be user details and session key
 
     Examples:
     | status |

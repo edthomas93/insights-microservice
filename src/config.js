@@ -11,5 +11,6 @@ module.exports = {
   // db URIs
   db: {
     url: process.env.DB_URL || 'mongodb://user:password12@ds259806.mlab.com:59806/testfilm'
-  }
+  },
+  secret: 'OneDirectionAreUnderrated'
 };
