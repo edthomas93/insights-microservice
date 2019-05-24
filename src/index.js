@@ -1,13 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const middlewares = require('../middlewares');
 const filmsRouter = require('./routers/films');
 const usersRouter = require('./routers/users');
-const mongoose = require('mongoose');
 
 const app = express();
 
 // DB Config
 const { db } = require('./config');
+
 console.log('===== URL ====', db);
 
 // connect to mongoDB
@@ -16,7 +17,7 @@ mongoose
   .then(() => {
     console.log('MongoDB Connected');
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
     console.log('MongoDB Not Connected');
   });

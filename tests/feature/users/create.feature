@@ -5,13 +5,12 @@ Feature: Post users
     When I call the POST /signup route
     Then The route should return a status code of <status>
     And The response body should be an Object
-    And The response body should be user details and session key
+    And The response body should be username and token
 
     Examples:
     | status |
     | 200    |
 
-  Scenario Outline: My request is validated
-    Given I have an invalid users signup payload
-    When I call the route
-    Then The status code is 400
+# Validate Body - Return 400 Status
+
+# Duplicate Username - Return 409

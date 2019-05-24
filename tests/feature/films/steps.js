@@ -21,7 +21,7 @@ Then('The GET films route should return a status code of {int}', function (statu
   this.response.statusCode.should.equal(statusCode);
 });
 
-Then('The response body should have {int} films', function(length) {
+Then('The response body should have {int} films', function (length) {
   this.responseBody.length.should.equal(length);
 });
 

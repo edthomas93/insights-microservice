@@ -1,6 +1,6 @@
 module.exports = {
-    id: 1,
-    username: 'eddyt993',
-    password: 'password',
-    favourites: []
+  id: 1,
+  username: 'existinguser',
+  password: 'password',
+  favourites: []
 };

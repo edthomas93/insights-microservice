@@ -20,10 +20,11 @@ router.post('/signup', async (req, res, next) => {
 // POST LOGIN / SIGN IN
 router.post('/signin', async (req, res, next) => {
   try {
-    const users = await controllers.users.list();
+    const users = await controllers.users.signin(req.body);
     res.status(200).json(users);
     return next();
   } catch (err) {
+    console.log(err);
     const statusCode = err.statusCode || 500;
     res.status(statusCode).json({ error: err.message });
     return next();

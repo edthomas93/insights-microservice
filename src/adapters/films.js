@@ -1,6 +1,6 @@
 const rp = require('request-promise');
 const config = require('../config');
-const { ServiceError } = require('../errors');
+const { InternalServerError } = require('../errors');
 
 const list = async () => {
   try {
@@ -19,7 +19,7 @@ const list = async () => {
   } catch (err) {
     // log error as close to occurance as possible
     console.log({ err: err.message, message: 'Error Obtaining Films' });
-    throw new ServiceError(err);
+    throw new InternalServerError(err);
   }
 };
 
